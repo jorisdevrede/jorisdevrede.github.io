@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jorisdevrede.github.io/architecture/practice/</loc>
+         <lastmod>2022-02-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jorisdevrede.github.io/deep-work/rules/</loc>
          <lastmod>2022-02-19</lastmod>
          <changefreq>daily</changefreq>

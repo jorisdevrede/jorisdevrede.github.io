@@ -329,9 +329,80 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Trusting TLS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Trusting TLS
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    Encryption
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trust" class="md-nav__link">
+    Trust
+  </a>
+  
+    <nav class="md-nav" aria-label="Trust">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-on-the-public-network" class="md-nav__link">
+    Trust on the public network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-cas" class="md-nav__link">
+    Commercial CA's
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-your-own" class="md-nav__link">
+    Rolling your own
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#but-my-browser-says" class="md-nav__link">
+    But my browser says
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -363,6 +434,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    Encryption
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trust" class="md-nav__link">
+    Trust
+  </a>
+  
+    <nav class="md-nav" aria-label="Trust">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trust-on-the-public-network" class="md-nav__link">
+    Trust on the public network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commercial-cas" class="md-nav__link">
+    Commercial CA's
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-your-own" class="md-nav__link">
+    Rolling your own
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#but-my-browser-says" class="md-nav__link">
+    But my browser says
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -382,16 +509,14 @@ cards will be stolen when you use self-signed certificates" and "turning off
 host verification will make your server vulnerable to hackers". Nobody knows,
 but it sounds scary, so it must be true. So what is the deal with TLS and is it
 really that scary?</p>
-<p>TLS has two functions*. The first is the encryption of data in transit, and the
-second is providing trusted connections. Encryption is the main one. That is the
-reason we have TLS. Trust is an extra that has its use, but does not compare in
-importance to encryption. It is however the one that we get worked up about.
-Let's look at each function in isolation.</p>
-<p><em>*Actually, TLS has more functions, but they pale in application compared to
-these two.</em></p>
-<ol>
-<li>Encryption </li>
-</ol>
+<p>TLS has two functions<sup>*</sup>. The first is the encryption of data in 
+transit, and the second is providing trusted connections. Encryption is the main
+one. That is the reason we have TLS. Trust is an extra that has its use, but
+does not compare in importance to encryption. It is however the one that we get
+worked up about. Let's look at each function in isolation.</p>
+<p><sup><em>*Actually, TLS has more functions, but they pale in application compared to
+these two.</em></sup></p>
+<h2 id="encryption">Encryption</h2>
 <p>TLS encrypts the TCP data packets between client and server. It does so by
 exchanging a symmetric key that both the client and the server use to encrypt
 and decrypt the packets. This ensures that only the client and server can read
@@ -399,23 +524,23 @@ the data that they exchange, but that no other intermediate system on the
 network can eavesdrop. Of course there are complex details, but this is the
 essence and there really isn't more to it. Data is encrypted in transit. That
 is it.</p>
-<ol>
-<li>Trust</li>
-</ol>
+<h2 id="trust">Trust</h2>
 <p>TLS can also provide a level of trust about the server that the client connects
 to using PKI certificates. The server provides the client a certificate that
 holds the address of the server and is signed by a third party, the Certificate
 Authority. This way, the client can verify independently that it is connecting
 to the intended server.</p>
+<h3 id="trust-on-the-public-network">Trust on the public network</h3>
 <p>This trust function is relevant on an untrusted public network, where client
 traffic can be intercepted by another server that poses as the intended server.
 The client can then be tricked into divulging sensitive information, like a
 password or credit card information. The trust function verifies that the
 connecting server corresponds with the intended address.</p>
-<p>This is a useful function on an uncontrolled public network to provide assurance
+<p>It is a useful function on an uncontrolled public network to provide assurance
 that the data reaches the intended recipient. On a controlled private network
-though, this is useless at best, but is probably an active hindrance. Here is
-why.</p>
+though, this is useless at best and is probably even an active hindrance. Here
+is why.</p>
+<h3 id="commercial-cas">Commercial CA's</h3>
 <p>Trust on a client, or more accurately "TLS host verification", works by first
 trusting the certificate of the Certificate Authority (CA) that signed the
 server certificate. By trusting the CA the client implicitly trusts all the
@@ -426,6 +551,7 @@ buy all the  public server certificates from these CA's. </p>
 certificates, and the company whose website you're surfing has bought its server
 certificate from those CA's, you don't have to worry about your TLS
 configuration. How different that is on a private network.</p>
+<h3 id="rolling-your-own">Rolling your own</h3>
 <p>Instead of using prepackaged commercial CA's, you can also create your own
 singing certificate. Technically, this provides the same level of trust and is
 cheaper, because you can make as many server certificates as you want for free.
@@ -440,6 +566,14 @@ with setting the 'host verification' parameter to 'false' in your TLS
 connections. It disables trust, relieves you off needless configuration and
 leaves only with its primary function; encryption of data in transit. No more,
 no less. </p>
+<h3 id="but-my-browser-says">But my browser says</h3>
+<p>When you do decide that the servers can be trusted and that host verification
+has no added value in your particular context, there is always your browser
+that screams bloody murder when trying to connect to one of those servers. That
+is because TLS host verification was designed for the internet with
+non-technical users in mind. Don't be that end user and know that TLS is a fail
+fast protocol. Just click 'OK' and know that your connection is encrypted and
+safe.</p>
                 
               
               
